@@ -18,4 +18,9 @@ class EnderecoDAO extends DAO {
     {
 
     }
+
+    function selectBairrosByIdCidade(int $id_cidade) 
+    {
+
+    }
 }
