@@ -54,4 +54,15 @@ class EnderecoModel extends Model {
             echo $err->getMessage();
         }
     }
+
+    public function getCidadesByUf(string $uf) 
+    {
+        try 
+        {
+            $dao = new EnderecoDAO();
+            return $dao->selectCidadesByUf((string) $uf);
+        } catch(Exception $err) {
+            echo $err->getMessage();
+        }
+    }
 }

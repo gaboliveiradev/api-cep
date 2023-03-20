@@ -51,7 +51,15 @@ class EnderecoController extends Controller {
     }
 
     public static function getCidadesByUf() {
+        try 
+        {
+            $uf = $_GET['uf'];
 
+            $model = new EnderecoModel();
+            parent::getResponseAsJSON($model->getCidadesByUf($uf));
+        } catch (Exception $err) {
+            parent::getExceptionAsJSON($err);
+        }
     }
 
     public static function getBairrosByIdCidade() : void 
