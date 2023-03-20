@@ -24,12 +24,30 @@ class EnderecoController extends Controller {
         }
     }
 
-    public static function getLogradouroByCep() {
+    public static function getLogradouroByCep() : void {
+        try 
+        {
+            $cep = parent::getIntFromUrl(isset($_GET['cep']) ? $_GET['cep'] : null);
 
+            $model = new EnderecoModel();
+
+            parent::getResponseAsJSON($model->getLogradouroByCep($cep));
+        } catch (Exception $err) {
+            parent::getExceptionAsJSON($err);
+        }
     }
 
-    public static function getLogradouroByBairroAndCidade() {
-        
+    public static function getLogradouroByBairroAndCidade() : void {
+        try 
+        {
+            $bairro = parent::getStringFromUrl(isset($_GET['bairro']) ? $_GET['bairro'] : null, 'bairro');
+            $id_cidade = parent::getIntFromUrl(isset($_GET['id_cidade']) ? $_GET['id_cidade'] : null, 'cep');
+
+            $model = new EnderecoModel();
+            parent::getResponseAsJSON($model->getLogradouroByBairroAndCidade($bairro, $id_cidade));
+        } catch (Exception $err) {
+            parent::getExceptionAsJSON($err);
+        }
     }
 
     public static function getCidadesByUf() {

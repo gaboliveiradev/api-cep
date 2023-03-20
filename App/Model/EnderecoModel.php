@@ -33,6 +33,17 @@ class EnderecoModel extends Model {
         }
     }
 
+    public function getLogradouroByBairroAndCidade(string $bairro, int $id_cidade) 
+    {
+        try 
+        {
+            $dao = new EnderecoDAO();
+            return $dao->selectLogradouroByBairroAndIdCidade((string) $bairro, (int) $id_cidade);
+        } catch(Exception $err) {
+            echo $err->getMessage();
+        }
+    }
+
     public function getBairrosByIdCidade(int $id_cidade)
     {
         try 

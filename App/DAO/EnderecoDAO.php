@@ -23,6 +23,16 @@ class EnderecoDAO extends DAO {
         return $endereco_obj;
     }
 
+    function selectLogradouroByBairroAndIdCidade(string $bairro, int $id_cidade) 
+    {
+        $sql = "SELECT * FROM logradouro WHERE bairro = ? AND id_cidade = ?";
+
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bindValue(1, $bairro);
+        $stmt->bindValue(2, $id_cidade);
+        $stmt->execute();
+    }
+
     function selectCidadesByUf($uf) 
     {
         $sql = "SELECT * FROM cidade WHERE uf = ? ORDER BY descricao";
