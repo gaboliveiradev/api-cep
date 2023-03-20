@@ -16,6 +16,28 @@
             exit(json_encode($data));
         }
 
+        protected static function getExceptionAsJSON(Exception $err) 
+        {
+            $exception = [
+                'message' => $err->getMessage(),
+                'code' => $err->getCode(),
+                'file' => $err->getFile(),
+                'line' => $err->getLine(),
+                'traceAsString' => $err->getTraceAsString(),
+                'previous' => $err->getPrevious()
+            ];
+
+            http_response_code(400);
+
+            header("Acess-Control-Allow-Origin: *");
+            header("Content-type: application/json; charset=utf-8");
+            header("Cache-Control: no-cache, must-revalidade");
+            header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+            header("Pragma: public");
+
+            exit(json_encode($exception));
+        }
+
         // ================ Metodos Gerados pelo Codeflame ================
         /*
          * isAuthenticated() é um metodo que verifica se o usuário está logado.
