@@ -38,6 +38,38 @@
             exit(json_encode($exception));
         }
 
+        protected static function isGet() 
+        {
+            if($_SERVER['REQUEST_METHOD'] !== 'GET') 
+                throw new Exception("O método de requisição deve ser GET");
+        }
+
+        protected static function isPost() 
+        {
+            if($_SERVER['REQUEST_METHOD'] !== 'POST') 
+                throw new Exception("O método de requisição deve ser POST");
+        }
+
+        protected static function getIntFromUrl($var_get, $var_name = null) : int
+        {
+            self::isGet();
+
+            if(!empty($var_get))
+                return (int) $var_get;
+            else
+                throw new Exception("Variável $var_name não identificada.");
+        }
+
+        protected static function getStringFromUrl($var_get, $var_name = null) : string
+        {
+            self::isGet();
+
+            if(!empty($var_get))
+                return (string) $var_get;
+            else
+                throw new Exception("Variável $var_name não identificada.");
+        }
+
         // ================ Metodos Gerados pelo Codeflame ================
         /*
          * isAuthenticated() é um metodo que verifica se o usuário está logado.
