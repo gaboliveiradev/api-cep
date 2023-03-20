@@ -18,7 +18,7 @@ class EnderecoController extends Controller {
             $logradouro = $_GET['logradouro'];
 
             $model = new EnderecoModel();
-            parent::getResponseAsJSON($model->getCepByLogradouro($logradouro));
+            parent::getResponseAsJSON($model->getCepByLogradouro( (string) $logradouro));
         } catch (Exception $err) {
             parent::getExceptionAsJSON($err);
         }
@@ -31,7 +31,7 @@ class EnderecoController extends Controller {
 
             $model = new EnderecoModel();
 
-            parent::getResponseAsJSON($model->getLogradouroByCep($cep));
+            parent::getResponseAsJSON($model->getLogradouroByCep( (int) $cep));
         } catch (Exception $err) {
             parent::getExceptionAsJSON($err);
         }
@@ -44,7 +44,7 @@ class EnderecoController extends Controller {
             $id_cidade = parent::getIntFromUrl(isset($_GET['id_cidade']) ? $_GET['id_cidade'] : null, 'cep');
 
             $model = new EnderecoModel();
-            parent::getResponseAsJSON($model->getLogradouroByBairroAndCidade($bairro, $id_cidade));
+            parent::getResponseAsJSON($model->getLogradouroByBairroAndCidade( (string) $bairro, (int) $id_cidade));
         } catch (Exception $err) {
             parent::getExceptionAsJSON($err);
         }
@@ -54,7 +54,16 @@ class EnderecoController extends Controller {
 
     }
 
-    public static function getBairrosByCidade() {
-        
+    public static function getBairrosByIdCidade() : void 
+    {
+        try 
+        {
+            $id_cidade = parent::getIntFromUrl(isset($_GET['id_cidade']) ? $_GET['id_cidade'] : null);
+
+            $model = new EnderecoModel();
+            parent::getResponseAsJSON($model->getBairrosByIdCidade( (int) $id_cidade));
+        } catch (Exception $err) {
+            parent::getExceptionAsJSON($err);
+        }    
     }
 }
