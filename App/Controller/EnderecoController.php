@@ -5,12 +5,6 @@ use App\Model\EnderecoModel;
 use Exception;
 
 class EnderecoController extends Controller {
-
-    public static function teste() {
-        //var_dump("Rafael Sanchez... Moçada... To Inu... Tiu");
-        parent::getResponseAsJSON($arr_cidades = ["Bariri", "Jau", "Itapuí", "Bauru"]);
-    }
-
     public static function getCepByLogradouro() : void 
     {
         try 
