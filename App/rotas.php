@@ -7,24 +7,29 @@ $parse_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 switch($parse_uri) {
 
-    // [OK] https://localhost:8000/endereco/by-cep?cep=
+    // [OK] http://localhost:8000/endereco/by-cep?cep=
     case "/endereco/by-cep":
         EnderecoController::getLogradouroByCep();
     break;
 
-    // [OK] https://localhost:8000/logradouro/by-bairro?bairro=
+    // [OK] http://localhost:8000/logradouro/by-bairro?bairro=
     case "/logradouro/by-bairro":
         EnderecoController::getLogradouroByBairroAndCidade();
     break;
 
-    // [OK] https://localhost:8000/cidades/by-uf?uf=
-    case "/cidades/by-uf":
+    // [OK] http://localhost:8000/cidades/by-uf?uf=
+    case "/cidade/by-uf":
         EnderecoController::getCidadesByUf();
     break;
 
-    // [OK] https://localhost:8000/bairro/by-cidade?cidade=
+    // [OK] http://localhost:8000/bairro/by-cidade?id_cidade=
     case "/bairro/by-cidade":
-        EnderecoController::getBairrosByCidade();
+        EnderecoController::getBairrosByIdCidade();
+    break;
+
+    // [OK] http://localhost:8000/cep/by-logradouro?logradouro=
+    case '/cep/by-logradouro':
+        EnderecoController::getCepByLogradouro();
     break;
 
     //[403] - Servidor recebeu a requisição, indentificou o autor. Porém não autorizou a emissão da resposta.
